@@ -109,7 +109,8 @@ namespace Source
             // Select unit
             SelectUnitForPlayerSingle(_playerUnits[playerId], _players[playerId]);
             // Pan camera
-            PanCameraToLocForPlayer(_players[playerId], unitLocation);
+            //PanCameraToLocForPlayer(_players[playerId], unitLocation);
+            SetCameraPositionLocForPlayer(_players[playerId], unitLocation);
         }
 
         /// <summary>
@@ -138,7 +139,8 @@ namespace Source
             // Select unit
             SelectUnitForPlayerSingle(_playerUnits[playerId], _players[playerId]);
             // Pan camera
-            PanCameraToLocForPlayer(_players[playerId], unitLocation);
+            //PanCameraToLocForPlayer(_players[playerId], unitLocation);
+            SetCameraPositionLocForPlayer(_players[playerId], unitLocation);
         }
 
         public static ResourceData GetResourceData(int playerId)

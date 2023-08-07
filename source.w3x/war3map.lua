@@ -10,11 +10,11 @@ end
 function CreateAllItems()
 local itemID
 
-BlzCreateItemWithSkin(FourCC("I000"), -2036.3, -3319.7, FourCC("I000"))
 BlzCreateItemWithSkin(FourCC("I000"), -2141.4, -3332.2, FourCC("I000"))
-BlzCreateItemWithSkin(FourCC("I001"), -1813.1, -3474.6, FourCC("I001"))
+BlzCreateItemWithSkin(FourCC("I000"), -2036.3, -3319.7, FourCC("I000"))
 BlzCreateItemWithSkin(FourCC("I001"), -2127.4, -3490.3, FourCC("I001"))
 BlzCreateItemWithSkin(FourCC("I001"), -1913.9, -3481.0, FourCC("I001"))
+BlzCreateItemWithSkin(FourCC("I001"), -1813.1, -3474.6, FourCC("I001"))
 BlzCreateItemWithSkin(FourCC("I002"), -2011.7, -3484.5, FourCC("I002"))
 end
 
@@ -38,9 +38,9 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("ncop"), -3200.0, -3200.0, 270.000, FourCC("ncop"))
-u = BlzCreateUnitWithSkin(p, FourCC("ncop"), -2944.0, -3200.0, 270.000, FourCC("ncop"))
-u = BlzCreateUnitWithSkin(p, FourCC("ncop"), -2688.0, -3200.0, 270.000, FourCC("ncop"))
+u = BlzCreateUnitWithSkin(p, FourCC("ncop"), -29760.0, -29056.0, 270.000, FourCC("ncop"))
+u = BlzCreateUnitWithSkin(p, FourCC("ncop"), -29504.0, -29056.0, 270.000, FourCC("ncop"))
+u = BlzCreateUnitWithSkin(p, FourCC("ncop"), -29248.0, -29056.0, 270.000, FourCC("ncop"))
 u = BlzCreateUnitWithSkin(p, FourCC("ncop"), -2112.0, -2752.0, 270.000, FourCC("ncop"))
 end
 
@@ -51,9 +51,9 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("H002"), -2931.5, -2957.5, 266.352, FourCC("H002"))
-u = BlzCreateUnitWithSkin(p, FourCC("H001"), -3190.8, -2950.1, 267.198, FourCC("H001"))
-u = BlzCreateUnitWithSkin(p, FourCC("H000"), -2678.7, -2959.3, 266.824, FourCC("H000"))
+u = BlzCreateUnitWithSkin(p, FourCC("H002"), -29491.5, -28813.5, 266.352, FourCC("H002"))
+u = BlzCreateUnitWithSkin(p, FourCC("H001"), -29750.8, -28806.1, 267.198, FourCC("H001"))
+u = BlzCreateUnitWithSkin(p, FourCC("H000"), -29238.7, -28815.3, 266.824, FourCC("H000"))
 end
 
 function CreatePlayerBuildings()
@@ -73,12 +73,12 @@ end
 function CreateRegions()
 local we
 
-gg_rct_WarriorSelectRegion = Rect(-3264.0, -3264.0, -3136.0, -3136.0)
-gg_rct_MageSelectRegion = Rect(-3008.0, -3264.0, -2880.0, -3136.0)
-gg_rct_ArcherSelectRegion = Rect(-2752.0, -3264.0, -2624.0, -3136.0)
-gg_rct_HeroSpawnRegion = Rect(-2176.0, -3456.0, -2048.0, -3328.0)
+gg_rct_WarriorSelectRegion = Rect(-29824.0, -29120.0, -29696.0, -28992.0)
+gg_rct_MageSelectRegion = Rect(-29568.0, -29120.0, -29440.0, -28992.0)
+gg_rct_ArcherSelectRegion = Rect(-29312.0, -29120.0, -29184.0, -28992.0)
+gg_rct_HeroSpawnRegion = Rect(-2528.0, -3456.0, -2400.0, -3328.0)
 gg_rct_JobAdvancementRegion = Rect(-2176.0, -2816.0, -2048.0, -2688.0)
-gg_rct_GameStartRegion = Rect(-3008.0, -3520.0, -2880.0, -3392.0)
+gg_rct_GameStartRegion = Rect(-29536.0, -29664.0, -29408.0, -29536.0)
 end
 
 function InitCustomPlayerSlots()
@@ -94,7 +94,7 @@ SetPlayerTeam(Player(0), 0)
 end
 
 function main()
-SetCameraBounds(-3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 3328.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 3072.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 3072.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 3328.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+SetCameraBounds(-29952.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -29696.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 29952.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 29696.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -29952.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 29696.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 29952.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -29696.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
 SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
 NewSoundEnvironment("Default")
 SetAmbientDaySound("LordaeronWinterDay")
@@ -113,7 +113,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -3264.0, -3520.0)
+DefineStartLocation(0, -29696.0, -29440.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()
