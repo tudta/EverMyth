@@ -1,0 +1,114 @@
+﻿STRING 1
+{
+RPGTest
+}
+
+STRING 2
+{
+Testers
+}
+
+STRING 3
+{
+Test map for RPG system prototypes.
+}
+
+STRING 4
+{
+Tudta
+}
+
+STRING 5
+{
+Player 1
+}
+
+STRING 6
+{
+Force 1
+}
+
+STRING 7
+// Units: xxxx (Dummy), Name (Name)
+{
+Dummy
+}
+
+STRING 10
+// Units: e000 (Soul of Hero), Name (Name)
+{
+Soul of Hero
+}
+
+STRING 11
+// Units: H000 (Archer), Name (Name)
+{
+Archer
+}
+
+STRING 12
+// Units: H001 (Warrior), Name (Name)
+{
+Warrior
+}
+
+STRING 13
+// Units: H002 (Mage), Name (Name)
+{
+Mage
+}
+
+STRING 14
+// Units: n000 (Spooder), Name (Name)
+{
+Spooder
+}
+
+STRING 15
+// Units: n001 (Spooder King), Name (Name)
+{
+Spooder King
+}
+
+STRING 16
+// Items: I000 (DummyItem), Name (Name)
+{
+DummyItem
+}
+
+STRING 17
+// Items: I000 (DummyItem), Description (Description)
+{
+An item base.
+}
+
+STRING 18
+// Abilities: A000 (Bop), Name (Name)
+{
+Bop
+}
+
+STRING 20
+// Items: I001 (Claws of Bop), Name (Name)
+{
+Claws of Bop
+}
+
+STRING 21
+// Items: I002 (Claws of Passive Bop), Name (Name)
+{
+Claws of Passive Bop
+}
+
+STRING 22
+// Abilities: A002 (Stun Effect), Name (Name)
+{
+Stun Effect
+}
+
+STRING 23
+// Doodads: D000 (AnimeTree), Name (Name)
+{
+AnimeTree
+}
+
