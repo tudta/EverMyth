@@ -157,6 +157,31 @@ namespace Source
             return null;
         }
 
+        public static List<UnitInstance> GetUnitInstancesOfType(int unitTypeId)
+        {
+            List<UnitInstance> units = new List<UnitInstance>();
+            for (int i = 0; i < _unitInstanceDatabase.Count; i++)
+            {
+                if (GetUnitTypeId(_unitInstanceDatabase.ElementAt(i).Key) == unitTypeId)
+                {
+                    units.Add(_unitInstanceDatabase.ElementAt(i).Value);
+                }
+                 
+            }
+            for (int i = 0; i < _heroUnitInstanceDatabase.Count; i++)
+            {
+                if (GetUnitTypeId(_heroUnitInstanceDatabase.ElementAt(i).Key) == unitTypeId)
+                {
+                    units.Add(_heroUnitInstanceDatabase.ElementAt(i).Value);
+                }
+            }
+            if (units.Count > 0)
+            {
+                return units;
+            }
+            return null;
+        }
+
         /// <summary>
         /// Used to respond to newly created unit
         /// </summary>
@@ -224,7 +249,7 @@ namespace Source
                     BlzSetUnitAttackCooldown(unitInstanceData.LinkedUnit, unitInstanceData.UnitData.TotalAttackCooldown, 0);
                     break;
                 case UnitCombatStat.PHYSICAL_ATTACK_DAMAGE:
-                    BlzSetUnitBaseDamage(unitInstanceData.LinkedUnit, unitInstanceData.UnitData.TotalPhysicalAttackDamage - 1, 0);
+                    //BlzSetUnitBaseDamage(unitInstanceData.LinkedUnit, unitInstanceData.UnitData.TotalPhysicalAttackDamage - 1, 0);
                     break;
                 case UnitCombatStat.MAGICAL_ATTACK_DAMAGE:
                     //BlzSetUnitBaseDamage(unitInstanceData.LinkedUnit, unitInstanceData.UnitData.TotalMagicalAttackDamage - 1, 0);
@@ -280,8 +305,17 @@ namespace Source
         private static void InitializeUnitReferenceDatabase()
         {
             _unitReferenceDatabase = new Dictionary<int, UnitCombatData>();
+            _unitReferenceDatabase.Add(Constants.UNIT_TRAINING_DUMMY, new UnitCombatData(Constants.UNIT_TRAINING_DUMMY, 0, 0, int.MaxValue, 0, 0.0f, 0.0f, 0.0f, 0, 0, 0, 0, 0.0f, 0.0f, 0, 0));
             _unitReferenceDatabase.Add(Constants.UNIT_SPOODER, new UnitCombatData(Constants.UNIT_SPOODER, 1, 100, 50, 20, 1.0f, 0.0f, 1.0f, 5, 1, 0, 0, 0.0f, 0.0f, 0, 0));
             _unitReferenceDatabase.Add(Constants.UNIT_SPOODER_KING, new UnitCombatData(Constants.UNIT_SPOODER_KING, 5, 1000, 150, 50, 2.0f, 0.0f, 1.5f, 25, 5, 0, 0, 0.0f, 0.0f, 5, 0));
+            _unitReferenceDatabase.Add(Constants.UNIT_BOAR_RUNT, new UnitCombatData(Constants.UNIT_BOAR_RUNT, 1, 10, 10, 5, 0.0f, 0.0f, 1.0f, 2, 0, 0, 0, 0.0f, 0.0f, 0, 0));
+            _unitReferenceDatabase.Add(Constants.UNIT_BOAR, new UnitCombatData(Constants.UNIT_BOAR, 2, 20, 15, 8, 0.0f, 0.0f, 1.0f, 3, 0, 0, 0, 0.0f, 0.0f, 2, 1));
+            _unitReferenceDatabase.Add(Constants.UNIT_BOAR_ALPHA, new UnitCombatData(Constants.UNIT_BOAR_ALPHA, 3, 30, 20, 10, 0.0f, 0.0f, 1.0f, 5, 0, 0, 0, 0.0f, 0.0f, 3, 2));
+            _unitReferenceDatabase.Add(Constants.UNIT_HOGZILLA, new UnitCombatData(Constants.UNIT_HOGZILLA, 7, 100, 100, 20, 0.0f, 0.0f, 1.0f, 8, 0, 0, 0, 0.0f, 0.0f, 5, 3));
+            _unitReferenceDatabase.Add(Constants.UNIT_BANDIT_THUG, new UnitCombatData(Constants.UNIT_BANDIT_THUG, 2, 20, 20, 10, 0.0f, 0.0f, 1.0f, 4, 0, 0, 0, 0.0f, 0.0f, 2, 0));
+            _unitReferenceDatabase.Add(Constants.UNIT_BANDIT_SCOUT, new UnitCombatData(Constants.UNIT_BANDIT_SCOUT, 3, 30, 20, 10, 0.0f, 0.0f, 1.0f, 6, 0, 0, 0, 0.0f, 0.0f, 1, 0));
+            _unitReferenceDatabase.Add(Constants.UNIT_BANDIT_LIEUTENANT, new UnitCombatData(Constants.UNIT_BANDIT_LIEUTENANT, 5, 50, 35, 15, 0.0f, 0.0f, 1.0f, 8, 0, 0, 0, 0.0f, 0.0f, 3, 0));
+            _unitReferenceDatabase.Add(Constants.UNIT_BANDIT_CAPTAIN, new UnitCombatData(Constants.UNIT_BANDIT_CAPTAIN, 7, 70, 50, 25, 0.0f, 0.0f, 1.0f, 10, 0, 0, 0, 0.0f, 0.0f, 5, 0));
         }
 
         private static void InitializeUnitInstanceDatabase()
@@ -294,8 +328,8 @@ namespace Source
         {
             _heroUnitReferenceDatabase = new Dictionary<int, UnitCombatData>();
             _heroUnitReferenceDatabase.Add(Constants.UNIT_SOUL_OF_HERO, new UnitCombatData(Constants.UNIT_SOUL_OF_HERO, 1, 0, 50, 20, 0.0f, 0.0f, 1.0f, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0, UnitAttribute.NO_ATTRIBUTE, 0, 0, 0));
-            _heroUnitReferenceDatabase.Add(Constants.UNIT_ARCHER, new UnitCombatData(Constants.UNIT_ARCHER, 1, 0, 75, 30, 0.0f, 0.0f, 0.75f, 8, 0, 0, 0, 0, 0, 0.0f, 0.0f, 1, UnitAttribute.AGILITY, 2, 1, 1));
-            _heroUnitReferenceDatabase.Add(Constants.UNIT_MAGE, new UnitCombatData(Constants.UNIT_MAGE, 1, 0, 50, 1000, 0.0f, 0.0f, 1.0f, 5, 5, 0, 0, 0, 0, 0.50f, 0.50f, 1, UnitAttribute.INTELLIGENCE, 1, 2, 1));
+            _heroUnitReferenceDatabase.Add(Constants.UNIT_ARCHER, new UnitCombatData(Constants.UNIT_ARCHER, 1, 0, 75, 30, 0.0f, 0.0f, 1.0f, 8, 0, 0, 0, 0, 0, 0.0f, 0.0f, 1, UnitAttribute.AGILITY, 2, 1, 1));
+            _heroUnitReferenceDatabase.Add(Constants.UNIT_MAGE, new UnitCombatData(Constants.UNIT_MAGE, 1, 0, 50, 1000, 0.0f, 0.0f, 1.0f, 5, 5, 0, 0, 0, 0, 0.5f, 0.5f, 1, UnitAttribute.INTELLIGENCE, 1, 2, 1));
             _heroUnitReferenceDatabase.Add(Constants.UNIT_WARRIOR, new UnitCombatData(Constants.UNIT_WARRIOR, 1, 0, 100, 20, 0.0f, 0.0f, 1.0f, 10, 0, 0, 0, 0, 0, 0.0f, 0.0f, 1, UnitAttribute.STRENGTH, 1, 1, 2));
         }
 

@@ -112,3 +112,81 @@ STRING 23
 AnimeTree
 }
 
+STRING 25
+// Doodads: D001 (CityWallCorner), Name (Name)
+{
+CityWallCorner
+}
+
+STRING 26
+// Doodads: D002 (Rocks (Blocker)), Name (Name)
+{
+Rocks (Blocker)
+}
+
+STRING 28
+// Units: n003 (Hogzilla), Name (Name)
+{
+Hogzilla
+}
+
+STRING 29
+// Units: n002 (Boar Runt), Name (Name)
+{
+Boar Runt
+}
+
+STRING 30
+// Units: n004 (Boar), Name (Name)
+{
+Boar
+}
+
+STRING 31
+// Units: n005 (Boar Alpha), Name (Name)
+{
+Boar Alpha
+}
+
+STRING 32
+// Units: n006 (Bandit Thug), Name (Name)
+{
+Bandit Thug
+}
+
+STRING 33
+// Units: n007 (Bandit Scout), Name (Name)
+{
+Bandit Scout
+}
+
+STRING 34
+// Units: n008 (Bandit Lieutenant), Name (Name)
+{
+Bandit Lieutenant
+}
+
+STRING 35
+// Units: n009 (Bandit Captain), Name (Name)
+{
+Bandit Captain
+}
+
+STRING 36
+// Units: n00A (Training Dummy), Name (Name)
+{
+Training Dummy
+}
+
+STRING 37
+// Units: n00A (Training Dummy), Description (Description)
+{
+A training dummy for testing damage output.
+}
+
+STRING 38
+// Units: n00A (Training Dummy), Tip (Tooltip - Basic)
+{
+Hit me
+}
+

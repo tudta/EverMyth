@@ -21,7 +21,7 @@ using static Regions;
 using static War3Api.Common;
 using static War3Api.Blizzard;
 
-namespace Source
+namespace Source.UI
 {
     public class MainMenu : CustomUIMenu
     {

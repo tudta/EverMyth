@@ -20,13 +20,15 @@ using static Constants;
 using static Regions;
 using static War3Api.Common;
 using static War3Api.Blizzard;
+using Source.UI.OldUI;
 
-namespace Source
+namespace Source.UI
 {
     public static class UIManager
     {
         private static Dictionary<int, MainMenu> _mainMenus;
         private static Dictionary<int, SaveLoadMenu> _saveLoadMenus;
+        private static Dictionary<int, UnitStatPanel> _unitStatPanels;
 
         private static Dictionary<int, Stack<framehandle>> _currentlyOpenMenus;
 
@@ -37,6 +39,7 @@ namespace Source
             GenerateUIMenus();
             CloseAllMenusGlobal();
             CreateEscapeTrigger();
+            InitializeUnitInfoPanels();
         }
 
         private static void GenerateUIMenus()
@@ -82,6 +85,29 @@ namespace Source
                 _saveLoadMenus[playerId].Init();
                 _currentlyOpenMenus[playerId].Push(_saveLoadMenus[playerId].BaseFrameHandle);
             }
+        }
+
+        //private static void InitializeUnitStatPanels()
+        //{
+        //    _unitStatPanels = new Dictionary<int, UnitStatPanel>();
+        //    int playerId = 0;
+        //    for (int i = 0; i < PlayerManager.Players.Count; i++)
+        //    {
+        //        playerId = PlayerManager.Players.ElementAt(i).Key;
+        //        _unitStatPanels.Add(playerId, new UnitStatPanel());
+        //        _unitStatPanels[playerId].Init();
+        //        _unitStatPanels[playerId].AssignPlayerSelectionTrigger(playerId);
+        //    }
+        //}
+
+        private static void InitializeUnitInfoPanels()
+        {
+            //FrameLoader.Init();
+            //UnitInfoPanels.Init();
+            //CustomStatPanel.Init();
+            UnitInfoPanelManager.Init();
+            UnitCombatDataPanelPrimary.Init();
+            NewCustomStatPanel.Init();
         }
 
         public static void OpenMenu(int playerId, CustomUIMenuType menuType)

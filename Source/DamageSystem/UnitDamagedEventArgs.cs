@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Source
+namespace Source.DamageSystem
 {
-    public class UnitAttackEventArgs : EventArgs
+    public class UnitDamagedEventArgs : EventArgs
     {
         public UnitInstance AttackingUnit;
         public UnitInstance TargetUnit;
+        public DamageType DamageDealtType;
+        public int DamageDealtAmount;
     }
 }

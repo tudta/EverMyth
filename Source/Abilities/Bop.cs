@@ -23,6 +23,7 @@ using static Regions;
 using War3Api;
 using static War3Api.Common;
 using static War3Api.Blizzard;
+using Source.DamageSystem;
 
 namespace Source.Abilities
 {
@@ -39,7 +40,7 @@ namespace Source.Abilities
             UnitInstance casterUnitInstance = UnitManager.GetUnitInstance(GetSpellAbilityUnit());
             UnitInstance targetUnitInstance = UnitManager.GetUnitInstance(GetSpellTargetUnit());
             Console.WriteLine(GetUnitName(casterUnitInstance.LinkedUnit) + " has cast " + GetAbilityName(CustomAbilityId) + " on " + GetUnitName(targetUnitInstance.LinkedUnit));
-            DamageEngine.DamageUnit(casterUnitInstance, targetUnitInstance, DamageType.PURE, 100.0f);
+            DamageSystem.DamageEngine.DamageUnit(new DamageInstance(casterUnitInstance, targetUnitInstance, DamageType.PURE, 100));
         }
     }
 }

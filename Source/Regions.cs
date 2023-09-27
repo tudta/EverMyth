@@ -5,11 +5,13 @@ using WCSharp.Shared.Data;
 /// </summary>
 public static class Regions
 {
-	public static Rectangle WarriorSelectRegion { get; set; } = new Rectangle(-29824f, -29120f, -29696f, -28992f);
-	public static Rectangle MageSelectRegion { get; set; } = new Rectangle(-29568f, -29120f, -29440f, -28992f);
-	public static Rectangle ArcherSelectRegion { get; set; } = new Rectangle(-29312f, -29120f, -29184f, -28992f);
-	public static Rectangle HeroSpawnRegion { get; set; } = new Rectangle(-2528f, -3456f, -2400f, -3328f);
-	public static Rectangle JobAdvancementRegion { get; set; } = new Rectangle(-2176f, -2816f, -2048f, -2688f);
-	public static Rectangle GameStartRegion { get; set; } = new Rectangle(-29536f, -29664f, -29408f, -29536f);
+	public static Rectangle WarriorSelectRegion { get; set; } = new Rectangle(-29824f, -29632f, -29696f, -29504f);
+	public static Rectangle MageSelectRegion { get; set; } = new Rectangle(-29568f, -29632f, -29440f, -29504f);
+	public static Rectangle ArcherSelectRegion { get; set; } = new Rectangle(-29312f, -29632f, -29184f, -29504f);
+	public static Rectangle HeroSpawnRegion { get; set; } = new Rectangle(-64f, -1248f, 64f, -1120f);
+	public static Rectangle JobAdvancementRegion { get; set; } = new Rectangle(-1728f, -1600f, -1600f, -1472f);
+	public static Rectangle GameStartRegion { get; set; } = new Rectangle(-29568f, -30176f, -29440f, -30048f);
+	public static Rectangle Dungeon1Entrance { get; set; } = new Rectangle(-4160f, -4864f, -3680f, -4512f);
+	public static Rectangle Dungeon1Spawn { get; set; } = new Rectangle(-3456f, -30080f, -3328f, -29952f);
 
 }

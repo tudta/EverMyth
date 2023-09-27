@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Source
+namespace Source.UI
 {
-    public enum AttackType
+    public enum CustomUIMenuType
     {
-        AUTO_ATTACK,
-        SKILL,
-        ITEM,
-        ENVIRONMENTAL
+        MainMenu,
+        SaveLoadMenu,
+        StatsWindow
     }
 }
