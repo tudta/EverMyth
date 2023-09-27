@@ -19,6 +19,15 @@ public static class Constants
 	public const int UNIT_MAGE = 1211117618;
 	public const int UNIT_SPOODER = 1848651824;
 	public const int UNIT_SPOODER_KING = 1848651825;
+	public const int UNIT_HOGZILLA = 1848651827;
+	public const int UNIT_BOAR_RUNT = 1848651826;
+	public const int UNIT_BOAR = 1848651828;
+	public const int UNIT_BOAR_ALPHA = 1848651829;
+	public const int UNIT_BANDIT_THUG = 1848651830;
+	public const int UNIT_BANDIT_SCOUT = 1848651831;
+	public const int UNIT_BANDIT_LIEUTENANT = 1848651832;
+	public const int UNIT_BANDIT_CAPTAIN = 1848651833;
+	public const int UNIT_TRAINING_DUMMY = 1848651841;
 	public const int ORDER_OFFSET = 851970;
 	public const int ORDER_WAND_ILLUSION = 852274;
 	public const int ORDER_ABSORB = 852529;

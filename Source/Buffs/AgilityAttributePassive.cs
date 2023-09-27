@@ -24,12 +24,12 @@ namespace Source.Buffs
         private float _secondaryPhysicalAttackBonus = 0.0f;
         private float _secondaryMagicalAttackBonus = 0.0f;
 
-        private float _appliedPhysicalDamageReductionBonus = 0.25f;
-        private float _appliedAttackSpeedBonus = 0.05f;
-        private float _appliedCriticalChanceBonus = 0.00025f;
-        private float _appliedAbilityDamageBonus = 0.0005f;
-        private float _appliedPhysicalAttackBonus = 1.0f;
-        private float _appliedMagicalAttackBonus = 1.0f;
+        private float _appliedPhysicalDamageReductionBonus = 0.0f;
+        private float _appliedAttackSpeedBonus = 0.0f;
+        private float _appliedCriticalChanceBonus = 0.0f;
+        private float _appliedAbilityDamageBonus = 0.0f;
+        private float _appliedPhysicalAttackBonus = 0.0f;
+        private float _appliedMagicalAttackBonus = 0.0f;
 
         public AgilityAttributePassive(unit caster, unit target) : base(caster, target)
         {
@@ -56,12 +56,12 @@ namespace Source.Buffs
                 else
                 {
                     Console.WriteLine("Applying secondary agility passive!");
-                    _appliedPhysicalDamageReductionBonus = _secondaryPhysicalDamageReductionBonus;
-                    _appliedAttackSpeedBonus = _secondaryAttackSpeedBonus;
-                    _appliedCriticalChanceBonus = _secondaryCriticalChanceBonus;
-                    _appliedAbilityDamageBonus = _secondaryAbilityDamageBonus;
-                    _appliedPhysicalAttackBonus = _secondaryPhysicalAttackBonus;
-                    _appliedMagicalAttackBonus = _secondaryMagicalAttackBonus;
+                    _appliedPhysicalDamageReductionBonus = tmpInstance.UnitData.TotalAgility * _secondaryPhysicalDamageReductionBonus;
+                    _appliedAttackSpeedBonus = tmpInstance.UnitData.TotalAgility * _secondaryAttackSpeedBonus;
+                    _appliedCriticalChanceBonus = tmpInstance.UnitData.TotalAgility * _secondaryCriticalChanceBonus;
+                    _appliedAbilityDamageBonus = tmpInstance.UnitData.TotalAgility * _secondaryAbilityDamageBonus;
+                    _appliedPhysicalAttackBonus = tmpInstance.UnitData.TotalAgility * _secondaryPhysicalAttackBonus;
+                    _appliedMagicalAttackBonus = tmpInstance.UnitData.TotalAgility * _secondaryMagicalAttackBonus;
                 }
                 tmpInstance.UnitData.BonusFlatPhysicalDamageReduction += _appliedPhysicalDamageReductionBonus;
                 tmpInstance.UnitData.BonusAttackCooldown += _appliedAttackSpeedBonus;

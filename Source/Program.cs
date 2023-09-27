@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Source.UI;
+using System;
 using WCSharp.Events;
 using WCSharp.Sync;
 using static War3Api.Common;
@@ -46,6 +47,8 @@ namespace Source
 
 		private static void InitializeCustomScripts()
         {
+			War3Api.Blizzard.SetTimeOfDay(12.01f);
+			War3Api.Common.SuspendTimeOfDay(true);
 			UnitManager.Init();
             PlayerManager.Init();
             SaveManager.Init();
@@ -55,9 +58,10 @@ namespace Source
             ZoneCreepRespawn.Init();
 			ClassSelectionSystem.Init();
 			RegenerationSystem.Init();
-			DamageEngine.Init();
+			DamageSystem.DamageEngine.Init();
 			ItemSystem.Init();
 			CustomAbilityManager.Init();
+			TrainingDummySystem.Init();
         }
 	}
 }
