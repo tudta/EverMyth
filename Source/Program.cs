@@ -1,4 +1,5 @@
-﻿using Source.UI;
+﻿using Source.Dungeons;
+using Source.UI;
 using System;
 using WCSharp.Events;
 using WCSharp.Sync;
@@ -49,19 +50,22 @@ namespace Source
         {
 			War3Api.Blizzard.SetTimeOfDay(12.01f);
 			War3Api.Common.SuspendTimeOfDay(true);
+			FogEnable(false);
+			FogMaskEnable(false);
 			UnitManager.Init();
             PlayerManager.Init();
             SaveManager.Init();
             UIManager.Init();
             HeroRespawn.Init();
             HeroExperience.Init();
-            ZoneCreepRespawn.Init();
 			ClassSelectionSystem.Init();
 			RegenerationSystem.Init();
 			DamageSystem.DamageEngine.Init();
 			ItemSystem.Init();
 			CustomAbilityManager.Init();
 			TrainingDummySystem.Init();
-        }
+			DungeonManager.Init();
+			ZoneCreepRespawn.Init();
+		}
 	}
 }

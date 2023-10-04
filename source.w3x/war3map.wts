@@ -190,3 +190,56 @@ STRING 38
 Hit me
 }
 
+STRING 39
+// Items: I000 (DummyItem), Ubertip (Tooltip - Extended)
+{
+This is cheese. That is all. Carry on.
+}
+
+STRING 40
+// Items: I001 (Claws of Bop), Ubertip (Tooltip - Extended)
+{
++1000 Hp|nActive: Deal 100 pure damage to a target unit.
+}
+
+STRING 41
+// Items: I002 (Claws of Passive Bop), Ubertip (Tooltip - Extended)
+{
+Passive: 100% chance to stun target on attack for 2 seconds.
+}
+
+STRING 42
+{
+Player 2
+}
+
+STRING 43
+{
+Player 3
+}
+
+STRING 44
+{
+Player 4
+}
+
+STRING 45
+{
+Player 5
+}
+
+STRING 46
+{
+Player 6
+}
+
+STRING 47
+{
+Player 7
+}
+
+STRING 48
+{
+Player 8
+}
+

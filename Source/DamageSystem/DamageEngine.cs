@@ -62,7 +62,7 @@ namespace Source.DamageSystem
             //Console.WriteLine("Unit " + GetUnitName(damagingUnit) + " damaged unit " + GetUnitName(damagedUnit) + " for " + eventDamage + " with an attack type of " + ConvertAttackTypeToString(BlzGetEventAttackType()) + " and a damage type of " +  ConvertDamageTypeToString(BlzGetEventDamageType()) + "!");
             if (BlzGetEventIsAttack())
             {
-                Console.WriteLine("Detected damage is an attack!");
+                //Console.WriteLine("Detected damage is an attack!");
                 OnUnitAutoAttacked(null, new UnitAttackEventArgs() { AttackingUnit = damagingUnitInstance, TargetUnit = damagedUnitInstance });
                 DamageUnit(new List<DamageInstance>() 
                 { 
@@ -227,9 +227,9 @@ namespace Source.DamageSystem
                 case DamageType.PHYSICAL:
                     // Apply physical damage formula.
                     // Get starting physical reduction.
-                    Console.WriteLine("Incoming damage is starting at " + damageInstance.DamageInstanceAmount + "!");
+                    //Console.WriteLine("Incoming damage is starting at " + damageInstance.DamageInstanceAmount + "!");
                     float totalPhysicalReduction = damageInstance.DamageInstanceTarget.UnitData.TotalPhysicalDamageReduction;
-                    Console.WriteLine("Unit is starting with " + totalPhysicalReduction + " flat physical reduction!");
+                    //Console.WriteLine("Unit is starting with " + totalPhysicalReduction + " flat physical reduction!");
                     if (totalPhysicalReduction > 0.0f)
                     {
                         // Apply percent physical pen.
@@ -239,13 +239,13 @@ namespace Source.DamageSystem
                         // Clamp reduction.
                         Math.Clamp(totalPhysicalReduction, 0.0f, float.MaxValue);
                     }
-                    Console.WriteLine("Unit has " + totalPhysicalReduction + " flat physical reduction left!");
+                    //Console.WriteLine("Unit has " + totalPhysicalReduction + " flat physical reduction left!");
                     // Reduce damage by percent physical resistance.
                     damageInstance.DamageInstanceAmount *= 1.0f - damageInstance.DamageInstanceTarget.UnitData.AbsolutePhysicalDamageReductionPercent;
                     // Reduce damage by remaining flat physical resistance.
                     damageInstance.DamageInstanceAmount -= totalPhysicalReduction;
                     Math.Clamp(damageInstance.DamageInstanceAmount, 0.0f, float.MaxValue);
-                    Console.WriteLine("Damage has been reduced to " + damageInstance.DamageInstanceAmount + "!");
+                    //Console.WriteLine("Damage has been reduced to " + damageInstance.DamageInstanceAmount + "!");
                     roundedDamage = MathRound(damageInstance.DamageInstanceAmount);
                     damageInstance.DamageInstanceTarget.UnitData.CurrentHealth -= roundedDamage;
                     OnUnitDamaged(null, new UnitDamagedEventArgs() { AttackingUnit = damageInstance.DamageInstanceSource, TargetUnit = damageInstance.DamageInstanceTarget, DamageDealtType = DamageType.PHYSICAL, DamageDealtAmount = roundedDamage });
@@ -255,9 +255,9 @@ namespace Source.DamageSystem
                 case DamageType.MAGICAL:
                     // Apply magical damage formula.
                     // Get starting magical reduction.
-                    Console.WriteLine("Incoming damage is starting at " + damageInstance.DamageInstanceAmount + "!");
+                    //Console.WriteLine("Incoming damage is starting at " + damageInstance.DamageInstanceAmount + "!");
                     float totalMagicalReduction = damageInstance.DamageInstanceTarget.UnitData.TotalMagicalDamageReduction;
-                    Console.WriteLine("Unit is starting with " + totalMagicalReduction + " flat magical reduction!");
+                    //Console.WriteLine("Unit is starting with " + totalMagicalReduction + " flat magical reduction!");
                     if (totalMagicalReduction > 0.0f)
                     {
                         // Apply percent magical pen
@@ -267,13 +267,13 @@ namespace Source.DamageSystem
                         // Clamp reduction
                         Math.Clamp(totalMagicalReduction, 0.0f, float.MaxValue);
                     }
-                    Console.WriteLine("Unit has " + totalMagicalReduction + " flat magical reduction left!");
+                    //Console.WriteLine("Unit has " + totalMagicalReduction + " flat magical reduction left!");
                     // Reduce damage by percent magical resistance.
                     damageInstance.DamageInstanceAmount *= 1.0f - damageInstance.DamageInstanceTarget.UnitData.AbsoluteMagicalDamageReductionPercent;
                     // Reduce damage by remaining flat magical resistance.
                     damageInstance.DamageInstanceAmount -= totalMagicalReduction;
                     Math.Clamp(damageInstance.DamageInstanceAmount, 0.0f, float.MaxValue);
-                    Console.WriteLine("Damage has been reduced to " + damageInstance.DamageInstanceAmount + "!");
+                    //Console.WriteLine("Damage has been reduced to " + damageInstance.DamageInstanceAmount + "!");
                     roundedDamage = MathRound(damageInstance.DamageInstanceAmount);
                     damageInstance.DamageInstanceTarget.UnitData.CurrentHealth -= roundedDamage;
                     OnUnitDamaged(null, new UnitDamagedEventArgs() { AttackingUnit = damageInstance.DamageInstanceSource, TargetUnit = damageInstance.DamageInstanceTarget, DamageDealtType = DamageType.MAGICAL, DamageDealtAmount = roundedDamage });
@@ -378,13 +378,13 @@ namespace Source.DamageSystem
 
         private static float GetCriticalModifiedDamage(UnitInstance attackingUnit, float damageAmount)
         {
-            float criticalRoll = GetRandomInt(1, 100);
+            float criticalRoll = GetRandomReal(0.000f, 99.999f);
             float criticalDamageMultiplier = 0.0f;
-            Console.WriteLine("Crit roll is " + criticalRoll + " and needs to be less than " + attackingUnit.UnitData.TotalCriticalChance * 100 + "!");
-            if (criticalRoll < attackingUnit.UnitData.TotalCriticalChance * 100)
+            //Console.WriteLine("Crit roll is " + criticalRoll + " and needs to be less than " + attackingUnit.UnitData.TotalCriticalChance * 100 + "!");
+            if (criticalRoll < attackingUnit.UnitData.TotalCriticalChance)
             {
                 criticalDamageMultiplier = 1.0f + attackingUnit.UnitData.TotalCriticalDamage;
-                Console.WriteLine("Damage instance crit, changing value from " + damageAmount + " to " + damageAmount * criticalDamageMultiplier);
+                //Console.WriteLine("Damage instance crit, changing value from " + damageAmount + " to " + damageAmount * criticalDamageMultiplier);
                 damageAmount *= criticalDamageMultiplier;
             }
             return damageAmount;

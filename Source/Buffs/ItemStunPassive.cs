@@ -44,11 +44,11 @@ namespace Source.Buffs
             {
                 return;
             }
-            float procRoll = GetRandomInt(1, 100);
-            Console.WriteLine("Proc roll is " + procRoll + " and needs to be <= " + _stunChance + "!");
-            if (procRoll <= _stunChance * 100)
+            float procRoll = GetRandomReal(0.000f, 0.999f);
+            //Console.WriteLine("Proc roll is " + procRoll + " and needs to be < " + _stunChance + "!");
+            if (procRoll < _stunChance)
             {
-                Console.WriteLine("Bop effect activated!");
+                //Console.WriteLine("Bop effect activated!");
                 StatusEffectManager.StunUnit(TargetPlayer, args.TargetUnit.LinkedUnit, _stunDuration);
             }
         }
