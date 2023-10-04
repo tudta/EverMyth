@@ -93,9 +93,15 @@ namespace Launcher
 
 			// Collect required paths and compile
 			var coreSystemFiles = CSharpLua.CoreSystem.CoreSystemProvider.GetCoreSystemFiles();
-			var blizzardJ = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Warcraft III/JassHelper/Blizzard.j");
-			var commonJ = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Warcraft III/JassHelper/common.j");
-			var compileResult = map.CompileScript(compiler, coreSystemFiles, blizzardJ, commonJ);
+			var blizzardJ = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+			  "Warcraft III/JassHelper/Blizzard.j");
+			var commonJ = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+			  "Warcraft III/JassHelper/common.j");
+			var mapScriptBuilder = new MapScriptBuilder();
+			mapScriptBuilder.SetDefaultOptionsForCSharpLua();
+			mapScriptBuilder.ForceGenerateGlobalDestructableVariable = false;
+
+			var compileResult = map.CompileScript(compiler, mapScriptBuilder, coreSystemFiles, blizzardJ, commonJ);
 
 			// If compilation failed, output an error
 			if (!compileResult.Success)

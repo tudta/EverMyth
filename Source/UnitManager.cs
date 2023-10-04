@@ -182,6 +182,11 @@ namespace Source
             return null;
         }
 
+        public static bool IsHeroUnit(int unitTypeId)
+        {
+            return _heroUnitReferenceDatabase.ContainsKey(unitTypeId);
+        }
+
         /// <summary>
         /// Used to respond to newly created unit
         /// </summary>
@@ -328,7 +333,7 @@ namespace Source
         {
             _heroUnitReferenceDatabase = new Dictionary<int, UnitCombatData>();
             _heroUnitReferenceDatabase.Add(Constants.UNIT_SOUL_OF_HERO, new UnitCombatData(Constants.UNIT_SOUL_OF_HERO, 1, 0, 50, 20, 0.0f, 0.0f, 1.0f, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0, UnitAttribute.NO_ATTRIBUTE, 0, 0, 0));
-            _heroUnitReferenceDatabase.Add(Constants.UNIT_ARCHER, new UnitCombatData(Constants.UNIT_ARCHER, 1, 0, 75, 30, 0.0f, 0.0f, 1.0f, 8, 0, 0, 0, 0, 0, 0.0f, 0.0f, 1, UnitAttribute.AGILITY, 2, 1, 1));
+            _heroUnitReferenceDatabase.Add(Constants.UNIT_ARCHER, new UnitCombatData(Constants.UNIT_ARCHER, 1, 0, 75, 30, 0.0f, 0.0f, 1.0f, 8, 0, 0, 0, 0, 0, 0.0f, 0.0f, 1, UnitAttribute.AGILITY, 20, 1, 1));
             _heroUnitReferenceDatabase.Add(Constants.UNIT_MAGE, new UnitCombatData(Constants.UNIT_MAGE, 1, 0, 50, 1000, 0.0f, 0.0f, 1.0f, 5, 5, 0, 0, 0, 0, 0.5f, 0.5f, 1, UnitAttribute.INTELLIGENCE, 1, 2, 1));
             _heroUnitReferenceDatabase.Add(Constants.UNIT_WARRIOR, new UnitCombatData(Constants.UNIT_WARRIOR, 1, 0, 100, 20, 0.0f, 0.0f, 1.0f, 10, 0, 0, 0, 0, 0, 0.0f, 0.0f, 1, UnitAttribute.STRENGTH, 1, 1, 2));
         }

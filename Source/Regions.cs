@@ -11,7 +11,12 @@ public static class Regions
 	public static Rectangle HeroSpawnRegion { get; set; } = new Rectangle(-64f, -1248f, 64f, -1120f);
 	public static Rectangle JobAdvancementRegion { get; set; } = new Rectangle(-1728f, -1600f, -1600f, -1472f);
 	public static Rectangle GameStartRegion { get; set; } = new Rectangle(-29568f, -30176f, -29440f, -30048f);
-	public static Rectangle Dungeon1Entrance { get; set; } = new Rectangle(-4160f, -4864f, -3680f, -4512f);
-	public static Rectangle Dungeon1Spawn { get; set; } = new Rectangle(-3456f, -30080f, -3328f, -29952f);
+	public static Rectangle Dungeon1Entrance { get; set; } = new Rectangle(-736f, -992f, -256f, -640f);
+	public static Rectangle Dungeon1Start { get; set; } = new Rectangle(-3456f, -30208f, -3328f, -30080f);
+	public static Rectangle Dungeon1Zone { get; set; } = new Rectangle(-3456f, -30208f, 224f, -24480f);
+	public static Rectangle Dungeon1Area1 { get; set; } = new Rectangle(-3456f, -30208f, 224f, -26816f);
+	public static Rectangle Dungeon1Gate { get; set; } = new Rectangle(-1920f, -26816f, -1280f, -26688f);
+	public static Rectangle Dungeon1Area2 { get; set; } = new Rectangle(-3456f, -26848f, 224f, -24480f);
+	public static Rectangle Dungeon1Exit { get; set; } = new Rectangle(-1344f, -992f, -1088f, -640f);
 
 }

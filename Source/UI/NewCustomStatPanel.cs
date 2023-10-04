@@ -92,7 +92,7 @@ namespace Source.UI
 
         public static bool Update()
         {
-            Console.WriteLine("New custom stat panel update function running!");
+            //Console.WriteLine("New custom stat panel update function running!");
             BlzFrameSetText(_texts[0], BlzFrameGetText(BlzGetFrameByName("InfoPanelIconValue", 0)));
             BlzFrameSetText(_texts[1], BlzFrameGetText(BlzGetFrameByName("InfoPanelIconValue", 2)));
             BlzFrameSetText(_texts[2], "0");
@@ -108,7 +108,7 @@ namespace Source.UI
 
         public static void At0s()
         {
-            Console.WriteLine("New custom stat panel At0s function running!");
+            //Console.WriteLine("New custom stat panel At0s function running!");
             framehandle prevIcon;
 
             BlzGetFrameByName("InfoPanelIconValue", 0);

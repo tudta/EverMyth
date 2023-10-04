@@ -12,6 +12,7 @@ namespace Source
     public class ItemData
     {
         private int _itemId = 0;
+        private string _itemDescription = string.Empty;
         private ItemType _itemClassification;
         private List<int> _classIdRestrictions;
         private ItemStats _stats;
@@ -28,6 +29,19 @@ namespace Source
             set
             {
                 _itemId = value;
+            }
+        }
+
+        public string ItemDescription
+        {
+            get
+            {
+                return _itemDescription;
+            }
+
+            set
+            {
+                _itemDescription = value;
             }
         }
 

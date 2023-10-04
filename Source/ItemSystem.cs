@@ -231,9 +231,9 @@ namespace Source
         private static void InitializeItemReferenceDatabase()
         {
             _itemReferenceDatabase = new Dictionary<int, ItemData>();
-            _itemReferenceDatabase.Add(Constants.ITEM_DUMMYITEM, new ItemData(Constants.ITEM_DUMMYITEM, ItemType.ACCESSORY, new List<int>() { Constants.UNIT_ARCHER }, new ItemStats(), null));
-            _itemReferenceDatabase.Add(Constants.ITEM_CLAWS_OF_BOP, new ItemData(Constants.ITEM_CLAWS_OF_BOP, ItemType.WEAPON, new List<int>() { Constants.UNIT_ARCHER }, new ItemStats() { BonusFlatHealth = 1000.0f }, null));
-            _itemReferenceDatabase.Add(Constants.ITEM_CLAWS_OF_PASSIVE_BOP, new ItemData(Constants.ITEM_CLAWS_OF_PASSIVE_BOP, ItemType.WEAPON, new List<int>() { Constants.UNIT_ARCHER }, new ItemStats(), new Buffs.ItemStunPassive((unit)null, (unit)null)));
+            _itemReferenceDatabase.Add(Constants.ITEM_DUMMYITEM, new ItemData(Constants.ITEM_DUMMYITEM, ItemType.ACCESSORY, new List<int>() {  }, new ItemStats(), null));
+            _itemReferenceDatabase.Add(Constants.ITEM_CLAWS_OF_BOP, new ItemData(Constants.ITEM_CLAWS_OF_BOP, ItemType.WEAPON, new List<int>() {  }, new ItemStats() { BonusFlatHealth = 1000.0f }, null));
+            _itemReferenceDatabase.Add(Constants.ITEM_CLAWS_OF_PASSIVE_BOP, new ItemData(Constants.ITEM_CLAWS_OF_PASSIVE_BOP, ItemType.WEAPON, new List<int>() {  }, new ItemStats(), new Buffs.ItemStunPassive((unit)null, (unit)null)));
         }
     }
 }

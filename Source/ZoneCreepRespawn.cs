@@ -28,7 +28,13 @@ namespace Source
         private static float _respawnTime = 2.0f;
         private static group _zoneCreepUnitGroup = null;
         private static List<unit> _zoneCreepUnits = null;
-        private static List<location> _zoneCreepPoints = null;
+        private static List<SpawnData> _zoneCreepSpawnDatas = null;
+
+        private static trigger _respawnTrigger = null;
+        private static unit _enumUnit = null;
+        private static unit _spawnedUnit = null;
+        private static unit _dyingUnit = null;
+        private static int _dyingUnitIndex = 0;
 
         public static void Init()
         {
@@ -39,41 +45,53 @@ namespace Source
 
         private static void CreateRespawnTrigger()
         {
-            trigger respawnTrigger = CreateTrigger();
-            TriggerRegisterAnyUnitEventBJ(respawnTrigger, EVENT_PLAYER_UNIT_DEATH);
-            TriggerAddCondition(respawnTrigger, Condition(IsAZoneCreep));
-            TriggerAddAction(respawnTrigger, RespawnCreep);
+            _respawnTrigger = CreateTrigger();
+            TriggerRegisterAnyUnitEventBJ(_respawnTrigger, EVENT_PLAYER_UNIT_DEATH);
+            TriggerAddCondition(_respawnTrigger, Condition(IsDyingUnitZoneCreep));
+            TriggerAddAction(_respawnTrigger, RespawnCreep);
         }
 
         // Create unit groups and lists from existing creeps on map and index spawn points
         private static void InitializeCreepList()
         {
-            _zoneCreepUnitGroup = GetUnitsInRectOfPlayer(GetPlayableMapRect(), Player(PLAYER_NEUTRAL_AGGRESSIVE));
+            _zoneCreepUnitGroup = GetUnitsOfPlayerMatching(Player(PLAYER_NEUTRAL_AGGRESSIVE), Condition(IsUnitZoneCreep));
             _zoneCreepUnits = new List<unit>();
-            _zoneCreepPoints = new List<location>();
+            _zoneCreepSpawnDatas = new List<SpawnData>();
             ForGroupBJ(_zoneCreepUnitGroup, IndexCreep);
         }
 
         // Index spawn points of creeps
         private static void IndexCreep()
         {
-            unit enumUnit = GetEnumUnit();
-            _zoneCreepPoints.Add(GetUnitLoc(enumUnit));
-            _zoneCreepUnits.Add(enumUnit);
+            _enumUnit = GetEnumUnit();
+            _zoneCreepSpawnDatas.Add(new SpawnData() { RespawnTime = _respawnTime, SpawnPosX = GetUnitX(_enumUnit), SpawnPosY = GetUnitY(_enumUnit), SpawnRotation = GetUnitFacing(_enumUnit), UnitTypeId = GetUnitTypeId(_enumUnit) });
+            _zoneCreepUnits.Add(_enumUnit);
         }
 
         private static void RespawnCreep()
         {
-            unit dyingUnit = GetDyingUnit();
-            int dyingUnitIndex = _zoneCreepUnits.IndexOf(dyingUnit);
-            UnitManager.UnitInstanceDatabase.Remove(dyingUnit);
-            PolledWait(_respawnTime);
-            unit spawnedUnit = CreateUnitAtLoc(Player(PLAYER_NEUTRAL_AGGRESSIVE), GetUnitTypeId(dyingUnit), _zoneCreepPoints[dyingUnitIndex], bj_UNIT_FACING);
-            _zoneCreepUnits[dyingUnitIndex] = spawnedUnit;
-            UnitManager.AddUnit(spawnedUnit);
+            _dyingUnit = GetDyingUnit();
+            _dyingUnitIndex = _zoneCreepUnits.IndexOf(_dyingUnit);
+            UnitManager.UnitInstanceDatabase.Remove(_dyingUnit);
+            PolledWait(_zoneCreepSpawnDatas[_dyingUnitIndex].RespawnTime);
+            _spawnedUnit = CreateUnit(Player(PLAYER_NEUTRAL_AGGRESSIVE), GetUnitTypeId(_dyingUnit), _zoneCreepSpawnDatas[_dyingUnitIndex].SpawnPosX, _zoneCreepSpawnDatas[_dyingUnitIndex].SpawnPosY, _zoneCreepSpawnDatas[_dyingUnitIndex].SpawnRotation);
+            _zoneCreepUnits[_dyingUnitIndex] = _spawnedUnit;
+            UnitManager.AddUnit(_spawnedUnit);
         }
 
-        private static bool IsAZoneCreep()
+        private static bool IsUnitZoneCreep()
+        {
+            for (int i = 0; i < Dungeons.DungeonManager.DungeonRects.Count; i++)
+            {
+                if (RectContainsUnit(Dungeons.DungeonManager.DungeonRects[i], GetFilterUnit()))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private static bool IsDyingUnitZoneCreep()
         {
             if (_zoneCreepUnits.Contains(GetDyingUnit()))
             {
