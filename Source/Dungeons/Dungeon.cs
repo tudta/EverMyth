@@ -140,23 +140,24 @@ namespace Source.Dungeons
             _entranceInTrigger = CreateTrigger();
             TriggerRegisterEnterRegionSimple(_entranceInTrigger, _entranceRegion.Region);
             TriggerAddCondition(_entranceInTrigger, Condition(IsTriggeringUnitHero));
-            TriggerAddAction(_entranceInTrigger, CalculateEntranceState);
+            TriggerAddAction(_entranceInTrigger, CalculateEntranceUnitState);
             _entranceOutTrigger = CreateTrigger();
             TriggerRegisterLeaveRegionSimple(_entranceOutTrigger, _entranceRegion.Region);
             TriggerAddCondition(_entranceOutTrigger, Condition(IsTriggeringUnitHero));
-            TriggerAddAction(_entranceOutTrigger, CalculateEntranceState);
+            TriggerAddAction(_entranceOutTrigger, CalculateEntranceUnitState);
         }
 
         private void InitializeHeroDeathTrigger()
         {
             _heroUnitDeathTrigger = CreateTrigger();
-            TriggerAddCondition(_heroUnitDeathTrigger, Condition(IsDyingUnitHero));
+            TriggerRegisterAnyUnitEventBJ(_heroUnitDeathTrigger, EVENT_PLAYER_UNIT_DEATH);
+            TriggerAddCondition(_heroUnitDeathTrigger, Condition(IsDyingUnitDungeonHero));
             TriggerAddAction(_heroUnitDeathTrigger, HandleHeroUnitDeath);
         }
 
-        protected bool IsDyingUnitHero()
+        protected bool IsDyingUnitDungeonHero()
         {
-            if (IsHeroUnitId(GetUnitTypeId(GetDyingUnit())))
+            if (_dungeonPartyUnits.Contains(GetDyingUnit()))
             {
                 return true;
             }
@@ -190,26 +191,28 @@ namespace Source.Dungeons
         protected virtual void CalculateEntranceState()
         {
             //Console.WriteLine("Calculating entrance state!");
-            CalculateEntranceUnitState();
-            if (_entranceUnits.Count > 0)
+            if (!_isActive)
             {
-                //Console.WriteLine("Entrance units are present!");
-                if (!_isEntranceTimerRunning)
+                if (_entranceUnits.Count > 0)
                 {
-                    // Start timer.
-                    Console.WriteLine("Starting entrance countdown for " + _dungeonName + " dungeon!");
-                    _isEntranceTimerRunning = true;
-                    TimerStart(_entranceTimer, _enterTime, false, EnterDungeon);
+                    //Console.WriteLine("Entrance units are present!");
+                    if (!_isEntranceTimerRunning)
+                    {
+                        // Start timer.
+                        //Console.WriteLine("Starting entrance countdown for " + _dungeonName + " dungeon!");
+                        _isEntranceTimerRunning = true;
+                        TimerStart(_entranceTimer, _enterTime, false, EnterDungeon);
+                    }
+                    return;
                 }
-                return;
-            }
-            //Console.WriteLine("No entrance units are present!");
-            if (_isEntranceTimerRunning)
-            {
-                // Stop timer.
-                Console.WriteLine("Stopping entrance countdown for " + _dungeonName + " dungeon!");
-                _isEntranceTimerRunning = false;
-                PauseTimer(_entranceTimer);
+                //Console.WriteLine("No entrance units are present!");
+                if (_isEntranceTimerRunning)
+                {
+                    // Stop timer.
+                    //Console.WriteLine("Stopping entrance countdown for " + _dungeonName + " dungeon!");
+                    _isEntranceTimerRunning = false;
+                    PauseTimer(_entranceTimer);
+                }
             }
         }
 
@@ -221,10 +224,20 @@ namespace Source.Dungeons
             {
                 //Console.WriteLine("Adding " + GetUnitName(_triggerUnit) + " to entrance unit list!");
                 _entranceUnits.Add(_triggerUnit);
-                return;
             }
-            //Console.WriteLine("Removing " + GetUnitName(_triggerUnit) + " from entrance unit list!");
-            _entranceUnits.Remove(_triggerUnit);
+            else
+            {
+                //Console.WriteLine("Removing " + GetUnitName(_triggerUnit) + " from entrance unit list!");
+                _entranceUnits.Remove(_triggerUnit);
+            }
+            CalculateEntranceState();
+        }
+
+        private void ResetEntranceState()
+        {
+            _isEntranceTimerRunning = false;
+            _entranceUnits.Clear();
+            _entranceUnits.TrimExcess();
         }
 
         protected void AddHeroUnitsToDungeonInstance()
@@ -241,7 +254,7 @@ namespace Source.Dungeons
             //Console.WriteLine("Teleporting " + GetUnitName(entranceUnit) + " to dungeon start!");
             _owningPlayer = GetOwningPlayer(entranceUnit);
             SetUnitPosition(entranceUnit, _startRegion.Center.X, _startRegion.Center.Y);
-            PanCameraToTimedForPlayer(_owningPlayer, _startX, _startY, 0.0f);
+            SetCameraPositionForPlayer(_owningPlayer, _startX, _startY);
             SelectUnitForPlayerSingle(entranceUnit, _owningPlayer);
             _dungeonPartyUnits.Add(entranceUnit);
         }
@@ -266,6 +279,7 @@ namespace Source.Dungeons
             // Teleport players to start point.
             AddHeroUnitsToDungeonInstance();
             ActivateDungeon();
+            ResetEntranceState();
         }
 
         protected virtual void ActivateDungeon()
@@ -292,6 +306,8 @@ namespace Source.Dungeons
             DistributeDrops();
             // Deactivate dungeon.
             DeactivateDungeon();
+            // Calculate entrance state
+            CalculateEntranceState();
         }
 
         protected void TeleportHeroUnitsOutOfDungeon()
@@ -302,7 +318,7 @@ namespace Source.Dungeons
 
                 SetUnitPosition(_dungeonPartyUnits[i], _exitX, _exitY);
                 // Move camera.
-                PanCameraToTimedForPlayer(_owningPlayer, _exitX, _exitY, 0.0f);
+                SetCameraPositionForPlayer(_owningPlayer, _exitX, _exitY);
                 // Select hero.
                 SelectUnitForPlayerSingle(_dungeonPartyUnits[i], _owningPlayer);
             }

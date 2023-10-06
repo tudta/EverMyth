@@ -1518,7 +1518,7 @@ namespace Source
         private void CalculatePhysicalDamageReductionTotal()
         {
             //base + (base * percent) + bonus flat
-            _totalPhysicalDamageReduction = MathRound(_basePhysicalDamageReduction + (_basePhysicalDamageReduction * _bonusPercentPhysicalDamageReduction) + _bonusFlatPhysicalAttackDamage);
+            _totalPhysicalDamageReduction = MathRound(_basePhysicalDamageReduction + (_basePhysicalDamageReduction * _bonusPercentPhysicalDamageReduction) + _bonusFlatPhysicalDamageReduction);
             OnStatChanged(new StatChangeEventArgs(UnitCombatStat.FLAT_PHYSICAL_DAMAGE_REDUCTION));
         }
 

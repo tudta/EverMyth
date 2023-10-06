@@ -45,7 +45,7 @@ namespace Source.Buffs
             {
                 if (tmpInstance.UnitData.PrimaryAttribute == UnitAttribute.INTELLIGENCE)
                 {
-                    Console.WriteLine("Applying primary intelligence passive!");
+                    //Console.WriteLine("Applying primary intelligence passive!");
                     _appliedMagicReductionBonus = tmpInstance.UnitData.TotalIntelligence * _primaryMagicReductionBonus;
                     _appliedManaBonus = tmpInstance.UnitData.TotalIntelligence * _primaryManaBonus;
                     _appliedFlatManaRegenBonus = tmpInstance.UnitData.TotalIntelligence * _primaryFlatManaRegenBonus;
@@ -55,7 +55,7 @@ namespace Source.Buffs
                 }
                 else
                 {
-                    Console.WriteLine("Applying secondary intelligence passive!");
+                    //Console.WriteLine("Applying secondary intelligence passive!");
                     _appliedMagicReductionBonus = tmpInstance.UnitData.TotalIntelligence * _secondaryMagicReductionBonus;
                     _appliedManaBonus = tmpInstance.UnitData.TotalIntelligence * _secondaryManaBonus;
                     _appliedFlatManaRegenBonus = tmpInstance.UnitData.TotalIntelligence * _secondaryFlatManaRegenBonus;
@@ -74,10 +74,10 @@ namespace Source.Buffs
 
         public override void OnDispose()
         {
-            Console.WriteLine("Attempting to dispose intelligence attribute passive!");
+            //Console.WriteLine("Attempting to dispose intelligence attribute passive!");
             if (UnitManager.HeroUnitInstanceDatabase.TryGetValue(Target, out UnitInstance tmpInstance))
             {
-                Console.WriteLine("Removing intelligence passive!");
+                //Console.WriteLine("Removing intelligence passive!");
                 tmpInstance.UnitData.BonusFlatMagicalDamageReduction -= _appliedMagicReductionBonus;
                 tmpInstance.UnitData.BonusFlatMana -= _appliedManaBonus;
                 tmpInstance.UnitData.BonusFlatManaRegeneration -= _appliedFlatManaRegenBonus;

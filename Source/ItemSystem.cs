@@ -218,7 +218,7 @@ namespace Source
             targetInstance.UnitData.AbsoluteMagicalDamageReductionPercent -= targetItem.Stats.AbsoluteMagicalDamageReductionPercent;
             if (targetItem.PassiveBuff != null)
             {
-                BuffSystem.Dispel(targetInstance.LinkedUnit, null, true, 1, "ItemStunPassive");
+                BuffSystem.Dispel(targetInstance.LinkedUnit, null, true, 1, targetItem.PassiveBuff.BuffTypes[0]);
             }
         }
 

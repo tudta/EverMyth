@@ -215,7 +215,7 @@ namespace Source.DamageSystem
             DisplayDamageText(damageTotal, damageInstances[0].DamageInstanceTarget.LinkedUnit, GetPlayerId(GetOwningPlayer(damageInstances[0].DamageInstanceSource.LinkedUnit)));
         }
 
-        public static int DamageUnit(DamageInstance damageInstance)
+        private static int DamageUnit(DamageInstance damageInstance)
         {
             int roundedDamage = 0;
             if (damageInstance.DamageInstanceType != DamageType.PURE)
@@ -237,14 +237,14 @@ namespace Source.DamageSystem
                         // Apply flat physical pen.
                         totalPhysicalReduction -= damageInstance.DamageInstanceSource.UnitData.TotalPhysicalPenetration;
                         // Clamp reduction.
-                        Math.Clamp(totalPhysicalReduction, 0.0f, float.MaxValue);
+                        totalPhysicalReduction = Math.Clamp(totalPhysicalReduction, 0.0f, float.MaxValue);
                     }
                     //Console.WriteLine("Unit has " + totalPhysicalReduction + " flat physical reduction left!");
                     // Reduce damage by percent physical resistance.
                     damageInstance.DamageInstanceAmount *= 1.0f - damageInstance.DamageInstanceTarget.UnitData.AbsolutePhysicalDamageReductionPercent;
                     // Reduce damage by remaining flat physical resistance.
                     damageInstance.DamageInstanceAmount -= totalPhysicalReduction;
-                    Math.Clamp(damageInstance.DamageInstanceAmount, 0.0f, float.MaxValue);
+                    damageInstance.DamageInstanceAmount = Math.Clamp(damageInstance.DamageInstanceAmount, 0.0f, float.MaxValue);
                     //Console.WriteLine("Damage has been reduced to " + damageInstance.DamageInstanceAmount + "!");
                     roundedDamage = MathRound(damageInstance.DamageInstanceAmount);
                     damageInstance.DamageInstanceTarget.UnitData.CurrentHealth -= roundedDamage;
@@ -265,14 +265,14 @@ namespace Source.DamageSystem
                         // Apply flat magical pen
                         totalMagicalReduction -= damageInstance.DamageInstanceSource.UnitData.TotalMagicalPenetration;
                         // Clamp reduction
-                        Math.Clamp(totalMagicalReduction, 0.0f, float.MaxValue);
+                        totalMagicalReduction = Math.Clamp(totalMagicalReduction, 0.0f, float.MaxValue);
                     }
                     //Console.WriteLine("Unit has " + totalMagicalReduction + " flat magical reduction left!");
                     // Reduce damage by percent magical resistance.
                     damageInstance.DamageInstanceAmount *= 1.0f - damageInstance.DamageInstanceTarget.UnitData.AbsoluteMagicalDamageReductionPercent;
                     // Reduce damage by remaining flat magical resistance.
                     damageInstance.DamageInstanceAmount -= totalMagicalReduction;
-                    Math.Clamp(damageInstance.DamageInstanceAmount, 0.0f, float.MaxValue);
+                    damageInstance.DamageInstanceAmount = Math.Clamp(damageInstance.DamageInstanceAmount, 0.0f, float.MaxValue);
                     //Console.WriteLine("Damage has been reduced to " + damageInstance.DamageInstanceAmount + "!");
                     roundedDamage = MathRound(damageInstance.DamageInstanceAmount);
                     damageInstance.DamageInstanceTarget.UnitData.CurrentHealth -= roundedDamage;
@@ -294,79 +294,84 @@ namespace Source.DamageSystem
             }
         }
 
-        //public static int DamageUnit(UnitInstance damageSource, UnitInstance damageTarget, DamageType damageType, float damageAmount)
-        //{
-        //    int roundedDamage = 0;
-        //    if (damageType != DamageType.PURE)
-        //    {
-        //        GetCriticalModifiedDamage(damageSource, damageAmount);
-        //    }
-        //    switch (damageType)
-        //    {
-        //        case DamageType.PHYSICAL:
-        //            // Apply physical damage formula
-        //            // Get starting physical reduction
-        //            Console.WriteLine("Incoming damage is starting at " + damageAmount + "!");
-        //            float totalPhysicalReduction = damageTarget.UnitData.TotalPhysicalDamageReduction;
-        //            Console.WriteLine("Unit is starting with " + totalPhysicalReduction + " flat physical reduction!");
-        //            if (totalPhysicalReduction > 0.0f)
-        //            {
-        //                // Apply percent physical pen
-        //                totalPhysicalReduction *= 1.0f - damageSource.UnitData.AbsolutePercentPhysicalPenetration;
-        //                // Apply flat physical pen
-        //                totalPhysicalReduction -= damageSource.UnitData.TotalPhysicalPenetration;
-        //                // Clamp reduction
-        //                Math.Clamp(totalPhysicalReduction, 0.0f, float.MaxValue);
-        //            }
-        //            Console.WriteLine("Unit has " + totalPhysicalReduction + " flat physical reduction left!");
-        //            // Reduce damage by percent physical resistance
-        //            damageAmount *= 1.0f - damageTarget.UnitData.AbsolutePhysicalDamageReductionPercent;
-        //            // Reduce damage by remaining flat physical resistance
-        //            damageAmount -= totalPhysicalReduction;
-        //            Console.WriteLine("Damage has been reduced to " + damageAmount + "!");
-        //            roundedDamage = MathRound(damageAmount);
-        //            damageTarget.UnitData.CurrentHealth -= roundedDamage;
-        //            //DisplayDamageText(roundedDamage, damageTarget.LinkedUnit, GetPlayerId(GetOwningPlayer(damageSource.LinkedUnit)));
-        //            return roundedDamage;
-        //            //break;
-        //        case DamageType.MAGICAL:
-        //            // Apply magical damage formula
-        //            // Get starting magical reduction
-        //            Console.WriteLine("Incoming damage is starting at " + damageAmount + "!");
-        //            float totalMagicalReduction = damageTarget.UnitData.TotalMagicalDamageReduction;
-        //            Console.WriteLine("Unit is starting with " + totalMagicalReduction + " flat magical reduction!");
-        //            if (totalMagicalReduction > 0.0f)
-        //            {
-        //                // Apply percent magical pen
-        //                totalMagicalReduction *= 1.0f - damageSource.UnitData.AbsolutePercentMagicalPenetration;
-        //                // Apply flat magical pen
-        //                totalMagicalReduction -= damageSource.UnitData.TotalMagicalPenetration;
-        //                // Clamp reduction
-        //                Math.Clamp(totalMagicalReduction, 0.0f, float.MaxValue);
-        //            }
-        //            Console.WriteLine("Unit has " + totalMagicalReduction + " flat magical reduction left!");
-        //            // Reduce damage by percent magical resistance
-        //            damageAmount *= 1.0f - damageTarget.UnitData.AbsoluteMagicalDamageReductionPercent;
-        //            // Reduce damage by remaining flat magical resistance
-        //            damageAmount -= totalMagicalReduction;
-        //            Console.WriteLine("Damage has been reduced to " + damageAmount + "!");
-        //            roundedDamage = MathRound(damageAmount);
-        //            damageTarget.UnitData.CurrentHealth -= roundedDamage;
-        //            //DisplayDamageText(roundedDamage, damageTarget.LinkedUnit, GetPlayerId(GetOwningPlayer(damageSource.LinkedUnit)));
-        //            return roundedDamage;
-        //            //break;
-        //        case DamageType.PURE:
-        //            // Apply pure damage; no mitigation applied
-        //            roundedDamage = MathRound(damageAmount);
-        //            damageTarget.UnitData.CurrentHealth -= roundedDamage;
-        //            //DisplayDamageText(roundedDamage, damageTarget.LinkedUnit, GetPlayerId(GetOwningPlayer(damageSource.LinkedUnit)));
-        //            return roundedDamage;
-        //            //break;
-        //        default:
-        //            return roundedDamage;
-        //            //break;
-        //    }
-        //}
+        public static int DamageUnit(UnitInstance damageSource, UnitInstance damageTarget, DamageType damageType, float damageAmount)
+        {
+            int roundedDamage = 0;
+            if (damageType != DamageType.PURE)
+            {
+                GetCriticalModifiedDamage(damageSource, damageAmount);
+            }
+            switch (damageType)
+            {
+                case DamageType.PHYSICAL:
+                    // Apply physical damage formula.
+                    // Get starting physical reduction.
+                    //Console.WriteLine("Incoming damage is starting at " + damageInstance.DamageInstanceAmount + "!");
+                    float totalPhysicalReduction = damageTarget.UnitData.TotalPhysicalDamageReduction;
+                    //Console.WriteLine("Unit is starting with " + totalPhysicalReduction + " flat physical reduction!");
+                    if (totalPhysicalReduction > 0.0f)
+                    {
+                        // Apply percent physical pen.
+                        totalPhysicalReduction *= 1.0f - damageSource.UnitData.AbsolutePercentPhysicalPenetration;
+                        // Apply flat physical pen.
+                        totalPhysicalReduction -= damageSource.UnitData.TotalPhysicalPenetration;
+                        // Clamp reduction.
+                        totalPhysicalReduction = Math.Clamp(totalPhysicalReduction, 0.0f, float.MaxValue);
+                    }
+                    //Console.WriteLine("Unit has " + totalPhysicalReduction + " flat physical reduction left!");
+                    // Reduce damage by percent physical resistance.
+                    damageAmount *= 1.0f - damageTarget.UnitData.AbsolutePhysicalDamageReductionPercent;
+                    // Reduce damage by remaining flat physical resistance.
+                    damageAmount -= totalPhysicalReduction;
+                    damageAmount = Math.Clamp(damageAmount, 0.0f, float.MaxValue);
+                    //Console.WriteLine("Damage has been reduced to " + damageInstance.DamageInstanceAmount + "!");
+                    roundedDamage = MathRound(damageAmount);
+                    damageTarget.UnitData.CurrentHealth -= roundedDamage;
+                    OnUnitDamaged(null, new UnitDamagedEventArgs() { AttackingUnit = damageSource, TargetUnit = damageTarget, DamageDealtType = DamageType.PHYSICAL, DamageDealtAmount = roundedDamage });
+                    DisplayDamageText(roundedDamage, damageTarget.LinkedUnit, GetPlayerId(GetOwningPlayer(damageSource.LinkedUnit)));
+                    return roundedDamage;
+                //break;
+                case DamageType.MAGICAL:
+                    // Apply magical damage formula.
+                    // Get starting magical reduction.
+                    //Console.WriteLine("Incoming damage is starting at " + damageInstance.DamageInstanceAmount + "!");
+                    float totalMagicalReduction = damageTarget.UnitData.TotalMagicalDamageReduction;
+                    //Console.WriteLine("Unit is starting with " + totalMagicalReduction + " flat magical reduction!");
+                    if (totalMagicalReduction > 0.0f)
+                    {
+                        // Apply percent magical pen
+                        totalMagicalReduction *= 1.0f - damageSource.UnitData.AbsolutePercentMagicalPenetration;
+                        // Apply flat magical pen
+                        totalMagicalReduction -= damageSource.UnitData.TotalMagicalPenetration;
+                        // Clamp reduction
+                        totalMagicalReduction = Math.Clamp(totalMagicalReduction, 0.0f, float.MaxValue);
+                    }
+                    //Console.WriteLine("Unit has " + totalMagicalReduction + " flat magical reduction left!");
+                    // Reduce damage by percent magical resistance.
+                    damageAmount *= 1.0f - damageTarget.UnitData.AbsoluteMagicalDamageReductionPercent;
+                    // Reduce damage by remaining flat magical resistance.
+                    damageAmount -= totalMagicalReduction;
+                    damageAmount = Math.Clamp(damageAmount, 0.0f, float.MaxValue);
+                    //Console.WriteLine("Damage has been reduced to " + damageInstance.DamageInstanceAmount + "!");
+                    roundedDamage = MathRound(damageAmount);
+                    damageTarget.UnitData.CurrentHealth -= roundedDamage;
+                    OnUnitDamaged(null, new UnitDamagedEventArgs() { AttackingUnit = damageSource, TargetUnit = damageTarget, DamageDealtType = DamageType.MAGICAL, DamageDealtAmount = roundedDamage });
+                    DisplayDamageText(roundedDamage, damageTarget.LinkedUnit, GetPlayerId(GetOwningPlayer(damageSource.LinkedUnit)));
+                    return roundedDamage;
+                //break;
+                case DamageType.PURE:
+                    // Apply pure damage; no mitigation applied.
+                    roundedDamage = MathRound(damageAmount);
+                    damageTarget.UnitData.CurrentHealth -= roundedDamage;
+                    OnUnitDamaged(null, new UnitDamagedEventArgs() { AttackingUnit = damageSource, TargetUnit = damageTarget, DamageDealtType = DamageType.PURE, DamageDealtAmount = roundedDamage });
+                    DisplayDamageText(roundedDamage, damageTarget.LinkedUnit, GetPlayerId(GetOwningPlayer(damageSource.LinkedUnit)));
+                    return roundedDamage;
+                //break;
+                default:
+                    return roundedDamage;
+                    //break;
+            }
+        }
 
         public static void HealUnit(UnitInstance healingSource, UnitInstance healingTarget, float healAmount)
         {

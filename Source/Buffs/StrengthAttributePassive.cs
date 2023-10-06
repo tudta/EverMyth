@@ -45,7 +45,7 @@ namespace Source.Buffs
             {
                 if (tmpInstance.UnitData.PrimaryAttribute == UnitAttribute.STRENGTH)
                 {
-                    Console.WriteLine("Applying primary strength passive!");
+                    //Console.WriteLine("Applying primary strength passive!");
                     _appliedHealthBonus = tmpInstance.UnitData.TotalStrength * _primaryHealthBonus;
                     _appliedPhysicalPenetrationBonus = tmpInstance.UnitData.TotalStrength * _primaryPhysicalPenetrationBonus;
                     _appliedFlatHealthRegenBonus = tmpInstance.UnitData.TotalStrength * _primaryFlatHealthRegenBonus;
@@ -55,7 +55,7 @@ namespace Source.Buffs
                 }
                 else
                 {
-                    Console.WriteLine("Applying secondary strength passive!");
+                    //Console.WriteLine("Applying secondary strength passive!");
                     _appliedHealthBonus = tmpInstance.UnitData.TotalStrength * _secondaryHealthBonus;
                     _appliedPhysicalPenetrationBonus = tmpInstance.UnitData.TotalStrength * _secondaryPhysicalPenetrationBonus;
                     _appliedFlatHealthRegenBonus = tmpInstance.UnitData.TotalStrength * _secondaryFlatHealthRegenBonus;
@@ -74,10 +74,10 @@ namespace Source.Buffs
 
         public override void OnDispose()
         {
-            Console.WriteLine("Attempting to dispose strength attribute passive!");
+            //Console.WriteLine("Attempting to dispose strength attribute passive!");
             if (UnitManager.HeroUnitInstanceDatabase.TryGetValue(Target, out UnitInstance tmpInstance))
             {
-                Console.WriteLine("Removing strength passive!");
+                //Console.WriteLine("Removing strength passive!");
                 tmpInstance.UnitData.BonusFlatHealth -= _appliedHealthBonus;
                 tmpInstance.UnitData.BonusFlatPhysicalPenetration -= _appliedPhysicalPenetrationBonus;
                 tmpInstance.UnitData.BonusFlatHealthRegeneration -= _appliedFlatHealthRegenBonus;

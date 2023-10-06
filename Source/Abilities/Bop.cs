@@ -40,7 +40,7 @@ namespace Source.Abilities
             UnitInstance casterUnitInstance = UnitManager.GetUnitInstance(GetSpellAbilityUnit());
             UnitInstance targetUnitInstance = UnitManager.GetUnitInstance(GetSpellTargetUnit());
             Console.WriteLine(GetUnitName(casterUnitInstance.LinkedUnit) + " has cast " + GetAbilityName(CustomAbilityId) + " on " + GetUnitName(targetUnitInstance.LinkedUnit));
-            DamageSystem.DamageEngine.DamageUnit(new DamageInstance(casterUnitInstance, targetUnitInstance, DamageType.PURE, 100));
+            DamageSystem.DamageEngine.DamageUnit(casterUnitInstance, targetUnitInstance, DamageType.PURE, 100.0f);
         }
     }
 }

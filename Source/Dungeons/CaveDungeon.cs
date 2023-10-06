@@ -144,12 +144,14 @@ namespace Source.Dungeons
             for (int i = 0; i < _area1ZoneUnits.Count; i++)
             {
                 UnitManager.UnitInstanceDatabase.Remove(_area1ZoneUnits[i]);
+                RemoveUnit(_area1ZoneUnits[i]);
             }
             _area1ZoneUnits.Clear();
             _area1ZoneUnits.TrimExcess();
             for (int x = 0; x < _area2ZoneUnits.Count; x++)
             {
                 UnitManager.UnitInstanceDatabase.Remove(_area2ZoneUnits[x]);
+                RemoveUnit(_area2ZoneUnits[x]);
             }
             _area2ZoneUnits.Clear();
             _area2ZoneUnits.TrimExcess();

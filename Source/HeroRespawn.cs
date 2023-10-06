@@ -62,7 +62,7 @@ namespace Source
             UnitManager.HeroUnitInstanceDatabase[_dyingUnit].UnitData.CurrentHealth = UnitManager.HeroUnitInstanceDatabase[_dyingUnit].UnitData.TotalMaximumHealth;
             UnitManager.HeroUnitInstanceDatabase[_dyingUnit].UnitData.CurrentMana = UnitManager.HeroUnitInstanceDatabase[_dyingUnit].UnitData.TotalMaximumMana;
             // Move camera.
-            PanCameraToForPlayer(_owningPlayer, _spawnPosX, _spawnPosY);
+            SetCameraPositionForPlayer(_owningPlayer, _spawnPosX, _spawnPosY);
             // Select hero.
             SelectUnitForPlayerSingle(_dyingUnit, _owningPlayer);
         }
