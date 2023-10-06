@@ -29,8 +29,10 @@ namespace Source
         private static group _zoneCreepUnitGroup = null;
         private static List<unit> _zoneCreepUnits = null;
         private static List<SpawnData> _zoneCreepSpawnDatas = null;
+        private static List<timer> _zoneCreepRespawnTimers = null;
 
         private static trigger _respawnTrigger = null;
+        private static timer _expiredTimer = null;
         private static unit _enumUnit = null;
         private static unit _spawnedUnit = null;
         private static unit _dyingUnit = null;
@@ -48,7 +50,7 @@ namespace Source
             _respawnTrigger = CreateTrigger();
             TriggerRegisterAnyUnitEventBJ(_respawnTrigger, EVENT_PLAYER_UNIT_DEATH);
             TriggerAddCondition(_respawnTrigger, Condition(IsDyingUnitZoneCreep));
-            TriggerAddAction(_respawnTrigger, RespawnCreep);
+            TriggerAddAction(_respawnTrigger, HandleCreepDeath);
         }
 
         // Create unit groups and lists from existing creeps on map and index spawn points
@@ -57,6 +59,7 @@ namespace Source
             _zoneCreepUnitGroup = GetUnitsOfPlayerMatching(Player(PLAYER_NEUTRAL_AGGRESSIVE), Condition(IsUnitZoneCreep));
             _zoneCreepUnits = new List<unit>();
             _zoneCreepSpawnDatas = new List<SpawnData>();
+            _zoneCreepRespawnTimers = new List<timer>();
             ForGroupBJ(_zoneCreepUnitGroup, IndexCreep);
         }
 
@@ -66,15 +69,22 @@ namespace Source
             _enumUnit = GetEnumUnit();
             _zoneCreepSpawnDatas.Add(new SpawnData() { RespawnTime = _respawnTime, SpawnPosX = GetUnitX(_enumUnit), SpawnPosY = GetUnitY(_enumUnit), SpawnRotation = GetUnitFacing(_enumUnit), UnitTypeId = GetUnitTypeId(_enumUnit) });
             _zoneCreepUnits.Add(_enumUnit);
+            _zoneCreepRespawnTimers.Add(CreateTimer());
         }
 
-        private static void RespawnCreep()
+        private static void HandleCreepDeath()
         {
             _dyingUnit = GetDyingUnit();
             _dyingUnitIndex = _zoneCreepUnits.IndexOf(_dyingUnit);
             UnitManager.UnitInstanceDatabase.Remove(_dyingUnit);
-            PolledWait(_zoneCreepSpawnDatas[_dyingUnitIndex].RespawnTime);
-            _spawnedUnit = CreateUnit(Player(PLAYER_NEUTRAL_AGGRESSIVE), GetUnitTypeId(_dyingUnit), _zoneCreepSpawnDatas[_dyingUnitIndex].SpawnPosX, _zoneCreepSpawnDatas[_dyingUnitIndex].SpawnPosY, _zoneCreepSpawnDatas[_dyingUnitIndex].SpawnRotation);
+            TimerStart(_zoneCreepRespawnTimers[_dyingUnitIndex], _respawnTime, false, RespawnCreep);
+        }
+
+        private static void RespawnCreep()
+        {
+            _expiredTimer = GetExpiredTimer();
+            _dyingUnitIndex = _zoneCreepRespawnTimers.IndexOf(_expiredTimer);
+            _spawnedUnit = CreateUnit(Player(PLAYER_NEUTRAL_AGGRESSIVE), _zoneCreepSpawnDatas[_dyingUnitIndex].UnitTypeId, _zoneCreepSpawnDatas[_dyingUnitIndex].SpawnPosX, _zoneCreepSpawnDatas[_dyingUnitIndex].SpawnPosY, _zoneCreepSpawnDatas[_dyingUnitIndex].SpawnRotation);
             _zoneCreepUnits[_dyingUnitIndex] = _spawnedUnit;
             UnitManager.AddUnit(_spawnedUnit);
         }

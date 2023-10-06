@@ -89,10 +89,10 @@ namespace Source.UI
         {
             //Console.WriteLine("UnitCombatDataPanelPrimary update function running!");
             UnitCombatData data = UnitManager.GetUnitInstance(UnitInfoPanelManager.SelectedUnit).UnitData;
-            BlzFrameSetText(_texts[0], I2S(data.TotalPhysicalAttackDamage) + " | " + data.AbsolutePhysicalDamageReductionPercent);
+            BlzFrameSetText(_texts[0], I2S(data.TotalPhysicalAttackDamage));
             BlzFrameSetText(_texts[1], I2S(data.TotalMagicalAttackDamage));
-            BlzFrameSetText(_texts[2], I2S(data.TotalPhysicalDamageReduction));
-            BlzFrameSetText(_texts[3], I2S(data.TotalMagicalDamageReduction));
+            BlzFrameSetText(_texts[2], I2S(data.TotalPhysicalDamageReduction) + " | " + I2S(MathRound(data.AbsolutePhysicalDamageReductionPercent * 100)) + "%");
+            BlzFrameSetText(_texts[3], I2S(data.TotalMagicalDamageReduction) + " | " + I2S(MathRound(data.AbsoluteMagicalDamageReductionPercent * 100)) + "%"); ;
             BlzFrameSetText(_texts[4], R2S(1.0f / data.TotalAttackCooldown));
             BlzFrameSetText(_texts[5], I2S(data.TotalStrength));
             BlzFrameSetText(_texts[6], I2S(data.TotalAgility));

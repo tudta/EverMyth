@@ -17,6 +17,7 @@ namespace Source
             location targetLoc = GetUnitLoc(targetUnit);
             var dummy = DummySystem.GetDummy(GetLocationX(targetLoc), GetLocationY(targetLoc), GetLocationZ(targetLoc), owningPlayer);
             UnitAddAbility(dummy, Constants.ABILITY_STUN_EFFECT);
+            BlzSetAbilityRealLevelField(BlzGetUnitAbility(dummy, Constants.ABILITY_STUN_EFFECT), ABILITY_RLF_DURATION_HERO, 0, stunDuration);
             BlzSetAbilityRealLevelField(BlzGetUnitAbility(dummy, Constants.ABILITY_STUN_EFFECT), ABILITY_RLF_DURATION_NORMAL, 0, stunDuration);
             IssueTargetOrderById(dummy, Constants.ORDER_FIREBOLT, targetUnit);
             UnitRemoveAbility(dummy, Constants.ABILITY_STUN_EFFECT);

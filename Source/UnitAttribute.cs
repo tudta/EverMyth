@@ -11,6 +11,9 @@ namespace Source
         NO_ATTRIBUTE,
         AGILITY,
         INTELLIGENCE,
-        STRENGTH
+        STRENGTH,
+        AGILITY_INTELLIGENCE,
+        AGILITY_STRENGTH,
+        INTELLIGENCE_STRENGTH,
     }
 }

@@ -76,12 +76,6 @@ STRING 16
 DummyItem
 }
 
-STRING 17
-// Items: I000 (DummyItem), Description (Description)
-{
-An item base.
-}
-
 STRING 18
 // Abilities: A000 (Bop), Name (Name)
 {
@@ -241,5 +235,23 @@ Player 7
 STRING 48
 {
 Player 8
+}
+
+STRING 49
+// Items: I000 (DummyItem), Description (Description)
+{
+Yummy!
+}
+
+STRING 50
+// Items: I001 (Claws of Bop), Description (Description)
+{
+Condor's favorite weapon.
+}
+
+STRING 51
+// Items: I002 (Claws of Passive Bop), Description (Description)
+{
+Big stun whatcha call it?
 }
 

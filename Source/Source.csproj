@@ -22,4 +22,7 @@
 		<PackageReference Include="WCSharp.Shared" Version="2.2.0" />
 		<PackageReference Include="WCSharp.Sync" Version="2.2.0" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Items\" />
+	</ItemGroup>
 </Project>

@@ -45,7 +45,7 @@ namespace Source.Buffs
             {
                 if (tmpInstance.UnitData.PrimaryAttribute == UnitAttribute.AGILITY)
                 {
-                    Console.WriteLine("Applying primary agility passive!");
+                    //Console.WriteLine("Applying primary agility passive!");
                     _appliedPhysicalDamageReductionBonus = tmpInstance.UnitData.TotalAgility * _primaryPhysicalDamageReductionBonus;
                     _appliedAttackSpeedBonus = tmpInstance.UnitData.TotalAgility * _primaryAttackSpeedBonus;
                     _appliedCriticalChanceBonus = tmpInstance.UnitData.TotalAgility * _primaryCriticalChanceBonus;
@@ -55,7 +55,7 @@ namespace Source.Buffs
                 }
                 else
                 {
-                    Console.WriteLine("Applying secondary agility passive!");
+                    //Console.WriteLine("Applying secondary agility passive!");
                     _appliedPhysicalDamageReductionBonus = tmpInstance.UnitData.TotalAgility * _secondaryPhysicalDamageReductionBonus;
                     _appliedAttackSpeedBonus = tmpInstance.UnitData.TotalAgility * _secondaryAttackSpeedBonus;
                     _appliedCriticalChanceBonus = tmpInstance.UnitData.TotalAgility * _secondaryCriticalChanceBonus;
@@ -74,10 +74,10 @@ namespace Source.Buffs
 
         public override void OnDispose()
         {
-            Console.WriteLine("Attempting to dispose agility attribute passive!");
+            //Console.WriteLine("Attempting to dispose agility attribute passive!");
             if (UnitManager.HeroUnitInstanceDatabase.TryGetValue(Target, out UnitInstance tmpInstance))
             {
-                Console.WriteLine("Removing agility passive!");
+                //Console.WriteLine("Removing agility passive!");
                 tmpInstance.UnitData.BonusFlatPhysicalDamageReduction -= _appliedPhysicalDamageReductionBonus;
                 tmpInstance.UnitData.BonusAttackCooldown -= _appliedAttackSpeedBonus;
                 tmpInstance.UnitData.BonusCriticalChance -= _appliedCriticalChanceBonus;
